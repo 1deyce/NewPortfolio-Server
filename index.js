@@ -11,11 +11,10 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    sendEmail();
-    res.send("Email sent");
+    res.send("My Homepage");
 })
 
-app.post('/', (req, res) => {
+app.post('/email', (req, res) => {
     sendEmail();
     res.send("Email sent");
 })
