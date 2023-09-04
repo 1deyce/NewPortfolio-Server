@@ -11,7 +11,7 @@ app.use(cors({
     credentials: true,
 }));
 
-app.get('/test', (req, res) => {
+app.get('/', (req, res) => {
     email()
     res.send("Email sent");
 })
