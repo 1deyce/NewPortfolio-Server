@@ -30,7 +30,7 @@ function sendEmail() {
 
             const msg = {
                 to: 'keenandeyce@gmail.com',
-                from: data['email'],
+                from: "keenandeyce@gmail.com",
                 subject: data['subject'],
                 text: `Message from ${data['fullName']} (${data['email']}): ${data['message']}`,
                 html: `<strong>Message from ${data['fullName']} (${data['email']}):</strong> ${data['message']}`,
