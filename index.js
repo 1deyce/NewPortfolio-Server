@@ -1,18 +1,17 @@
 require("dotenv").config();
-
-const email = require('./src/sendEmail.js');
 const express = require('express');
 const app = express();
 const port = process.env.PORT
-
 const cors = require('cors');
+const sendEmail = require("./src/sendEmail.js");
+
 app.use(cors({
     origin: '*',
     credentials: true,
 }));
 
 app.get('/', (req, res) => {
-    email()
+    sendEmail();
     res.send("Email sent");
 })
 
