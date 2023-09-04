@@ -16,7 +16,7 @@ let collectionRef = db.collection("messages");
 let sentEmails = new Set();
 
 function sendEmail() {
-    collectionRef.onAdd((doc) => {
+    collectionRef.on("add", (doc) => {
         let docId = doc.id;
         // Check if the document has already been processed
         if (sentEmails.has(docId)) {
