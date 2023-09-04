@@ -15,6 +15,11 @@ app.get('/', (req, res) => {
     res.send("Email sent");
 })
 
+app.post('/', (req, res) => {
+    sendEmail();
+    res.send("Email sent");
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
