@@ -36,8 +36,9 @@ function sendEmail() {
 
             sgMail
                 .send(msg)
-                .then(() => {
+                .then((response) => {
                     console.log('Email sent!!')
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.error(error)
