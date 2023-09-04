@@ -3,6 +3,7 @@ const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.EMAIL_API, {
+    authMethod: "smtps",
     port: 465, //default smtp
 });
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
@@ -30,7 +31,7 @@ function sendEmail() {
 
             const msg = {
                 to: 'keenandeyce@gmail.com',
-                from: "keenandeyce@gmail.com",
+                from: data['email'],
                 subject: data['subject'],
                 text: `Message from ${data['fullName']} (${data['email']}): ${data['message']}`,
                 html: `<strong>Message from ${data['fullName']} (${data['email']}):</strong> ${data['message']}`,
@@ -52,4 +53,4 @@ function sendEmail() {
 }
 
 
-module.exports = sendEmail
+module.exports = sendEmail;
