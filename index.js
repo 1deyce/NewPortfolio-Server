@@ -11,8 +11,8 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    res.send("Email sent");
     sendEmail();
+    res.send("Email sent");
 })
 
 app.listen(port, () => {
