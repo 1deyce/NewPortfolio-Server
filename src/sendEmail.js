@@ -10,13 +10,13 @@ admin.initializeApp({
 
 let db = admin.firestore();
 
-let docRef = db.collection("messages");
+let collectionRef = db.collection("messages");
 
 // Initialize sentEmails set
 let sentEmails = new Set();
 
 function sendEmail() {
-    docRef.onAdd((doc) => {
+    collectionRef.onAdd((doc) => {
         let docId = doc.id;
         // Check if the document has already been processed
         if (sentEmails.has(docId)) {
