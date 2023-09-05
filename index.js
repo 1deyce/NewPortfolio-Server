@@ -12,14 +12,12 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-    res.send("My Homepage");
-})
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/email', (req, res) => {
     const { fullName, email, subject, message } = req.body;
-    sendEmail({ fullName, email, subject, message });
+    console.log(req.body);
+    // sendEmail({ fullName, email, subject, message });
     res.send("Backend POST success");
 })
 
