@@ -13,23 +13,23 @@ function sendEmail(data) {
     // message,
     const msg = {
         to: 'keenandeyce@gmail.com',
-        from: data['email'],
-        subject: data['subject'],
+        from: data[email],
+        subject: data[subject],
         text: `Hello,
     
-        You have received a message from ${data['fullName']} (${data['email']}).
+        You have received a message from ${data[fullName]} (${data[email]}).
     
         Message:
-        ${data['message']}
+        ${data[message]}
     
         Regards,
         Your Name`,
         html: `<p>Hello,</p>
     
-        <p>You have received a message from <strong>${data['fullName']}</strong> (${data['email']}).</p>
+        <p>You have received a message from <strong>${data[fullName]}</strong> (${data[email]}).</p>
     
         <p>Message:<br>
-        ${data['message']}</p>
+        ${data[message]}</p>
     
         <p>Regards,<br>
         Your Name</p>`,
