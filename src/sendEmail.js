@@ -9,7 +9,7 @@ sgMail.setApiKey(process.env.EMAIL_API, {
 function sendEmail(data) {
     const msg = {
         to: 'keenandeyce@gmail.com',
-        from: data.email,
+        from: 'keenandeyce@gmail.com',
         subject: data.subject,
         text: `Hello,
 
