@@ -13,11 +13,16 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.post('/email', (req, res) => {
+app.post('/email', async (req, res) => {
     const { fullName, email, subject, message } = req.body;
-    sendEmail({ fullName, email, subject, message });
-    res.send("Backend POST success");
-})
+    try {
+        await sendEmail({ fullName, email, subject, message });
+        res.send("Backend POST success");
+    } catch (error) {
+        console.error("Email sending failed:", error);
+        res.status(500).send("Failed to send email");
+    }
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
