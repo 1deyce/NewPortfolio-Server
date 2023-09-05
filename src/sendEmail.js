@@ -39,7 +39,7 @@ function sendEmail(data) {
                 resolve(response);
             })
             .catch((error) => {
-                console.error(error);
+                console.error("Email sending failed:", error);
                 reject(error);
             });
     });
