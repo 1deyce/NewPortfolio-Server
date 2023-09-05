@@ -7,33 +7,32 @@ sgMail.setApiKey(process.env.EMAIL_API, {
 });
 
 function sendEmail(data) {
-
     // fullName,
     // email,
     // subject,
     // message,
     const msg = {
         to: 'keenandeyce@gmail.com',
-        from: 'keenandeyce@gmail.com',
-        subject: data.subject,
+        from: data['email'],
+        subject: data['subject'],
         text: `Hello,
     
-        You have received a message from ${data.fullName} ${data.email}
+        You have received a message from ${data['fullName']} (${data['email']}).
     
         Message:
-        ${data.message}
+        ${data['message']}
     
         Regards,
-        ${data.fullName}`,
+        Your Name`,
         html: `<p>Hello,</p>
     
-        <p>You have received a message from <strong>${data.fullName}</strong> ${data.email}.</p>
+        <p>You have received a message from <strong>${data['fullName']}</strong> (${data['email']}).</p>
     
         <p>Message:<br>
-        ${data.message}</p>
+        ${data['message']}</p>
     
         <p>Regards,<br>
-        ${data.fullName}</p>`,
+        Your Name</p>`,
     };
 
     try {
