@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/email', (req, res) => {
+    
     sendEmail();
     res.send("Backend POST success");
 })

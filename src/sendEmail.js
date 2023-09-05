@@ -1,55 +1,51 @@
 require("dotenv").config();
-const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.EMAIL_API, {
     authMethod: "smtps",
     port: 465, //default smtp
 });
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
 
-let db = admin.firestore();
+function sendEmail(data) {
 
-let docRef = db.collection("messages");
+    // fullName,
+    // email,
+    // subject,
+    // message,
+    const msg = {
+        to: 'keenandeyce@gmail.com',
+        from: data.email,
+        subject: data.subject,
+        text: `Hello,
+    
+        You have received a message from ${data.fullName} ${data.email}
+    
+        Message:
+        ${data['message']}
+    
+        Regards,
+        ${data.fullName}`,
+        html: `<p>Hello,</p>
+    
+        <p>You have received a message from <strong>${data.fullName}</strong> ${data.email}.</p>
+    
+        <p>Message:<br>
+        ${data.message}</p>
+    
+        <p>Regards,<br>
+        ${data.fullName}</p>`,
+    };
 
-// Initialize sentEmails set
-let sentEmails = new Set();
+    try {
+        const response = sgMail.send(msg);
+        console.log("Email sent!")
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    };
 
-function sendEmail() {
-    docRef.orderBy("timestamp", "desc").limit(1).onSnapshot(querySnapshot => {
-        querySnapshot.forEach(async, (doc) => {
-            let docId = doc.id;
-            if (sentEmails.has(docId)) {
-                return; // Skip this document, we've already processed it.
-            }
-            sentEmails.add(docId);
-
-            let data = doc.data();
-
-            const msg = {
-                to: 'keenandeyce@gmail.com',
-                from: 'keenandeyce@gmail.com',
-                subject: data['subject'],
-                text: `Message from ${data['fullName']} (${data['email']}): ${data['message']}`,
-                html: `<strong>Message from ${data['fullName']} (${data['email']}):</strong> ${data['message']}`,
-            };
-
-            try {
-                const response = sgMail.send(msg);
-                console.log("Email sent!")
-                console.log(response);
-            } catch (error) {
-                console.error(error);
-            };
-
-        });
-    }, err => {
-        console.log(`Encountered error: ${err}`);
-    });
 }
+
 
 
 module.exports = sendEmail;
