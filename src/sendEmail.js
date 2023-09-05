@@ -19,7 +19,7 @@ function sendEmail(data) {
         ${data.message}
 
         Regards,
-        Your Name`,
+        ${data.fullName}`,
         html: `<p>Hello,</p>
 
         <p>You have received a message from <strong>${data.fullName}</strong> (${data.email}).</p>
@@ -28,7 +28,7 @@ function sendEmail(data) {
         ${data.message}</p>
 
         <p>Regards,<br>
-        Your Name</p>`,
+        ${data.fullName}</p>`,
     };
 
     return new Promise((resolve, reject) => {
