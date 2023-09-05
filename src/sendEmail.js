@@ -20,7 +20,7 @@ let sentEmails = new Set();
 
 function sendEmail() {
     docRef.orderBy("timestamp", "desc").limit(1).onSnapshot(querySnapshot => {
-        querySnapshot.forEach(doc => {
+        querySnapshot.forEach(async, (doc) => {
             let docId = doc.id;
             if (sentEmails.has(docId)) {
                 return; // Skip this document, we've already processed it.
@@ -31,21 +31,20 @@ function sendEmail() {
 
             const msg = {
                 to: 'keenandeyce@gmail.com',
-                from: data['email'],
+                from: 'keenandeyce@gmail.com',
                 subject: data['subject'],
                 text: `Message from ${data['fullName']} (${data['email']}): ${data['message']}`,
                 html: `<strong>Message from ${data['fullName']} (${data['email']}):</strong> ${data['message']}`,
             };
 
-            sgMail
-                .send(msg)
-                .then((response) => {
-                    console.log('Email sent!!')
-                    console.log(response);
-                })
-                .catch((error) => {
-                    console.error(error)
-                });
+            try {
+                const response = sgMail.send(msg);
+                console.log("Email sent!")
+                console.log(response);
+            } catch (error) {
+                console.error(error);
+            };
+
         });
     }, err => {
         console.log(`Encountered error: ${err}`);
