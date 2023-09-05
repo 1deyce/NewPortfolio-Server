@@ -14,14 +14,14 @@ function sendEmail(data) {
     // message,
     const msg = {
         to: 'keenandeyce@gmail.com',
-        from: data.email,
+        from: 'keenandeyce@gmail.com',
         subject: data.subject,
         text: `Hello,
     
         You have received a message from ${data.fullName} ${data.email}
     
         Message:
-        ${data['message']}
+        ${data.message}
     
         Regards,
         ${data.fullName}`,
