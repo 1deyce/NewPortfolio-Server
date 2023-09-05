@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/email', (req, res) => {
     const { fullName, email, subject, message } = req.body;
-    console.log(req.body);
+    console.log(req.body.fullName);
     // sendEmail({ fullName, email, subject, message });
     res.send("Backend POST success");
 })
